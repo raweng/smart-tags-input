@@ -2,13 +2,15 @@
 
 ‘Smart Tags Input’ is a JavaScript plugin that allows you to easily turn any text input (entered within double curly braces) into ‘smart tags’. This helps you differentiate normal text from the text that you want to highlight. 
 
-# Features 
+## Features 
 
-Quick delete: Once normal text is converted to smart tags, you can delete the entire tag with one press of ‘Backspace’ or ‘Delete’ keys. 
+**Quick delete**: Once normal text is converted to smart tags, you can delete the entire tag with one press of ‘Backspace’ or ‘Delete’ keys. 
 
-Edit text: Clicking on this smart tag makes it editable, unlike most tags. You can then edit the text present within the curly braces, and convert it back to smart tags instantly. 
+**Edit text**: Clicking on this smart tag makes it editable, unlike most tags. You can then edit the text present within the curly braces, and convert it back to smart tags instantly. 
 
-#Installation
+**Choice of brackets**: We can change the type of bracket by changing the options provided in init(*options*) startLimit and endLimit. 
+
+## Installation
 
 Add script tag with the plugin file in our html <head> tag
 
@@ -25,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function(){
 }, false);
 ```
 
-#License
+## License
 
 The MIT License (MIT)
 Copyright (c) 2016 Built.io 
