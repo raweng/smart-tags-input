@@ -10,6 +10,7 @@ h1{
 }
 
 .tags-input{
+    opacity: 0;
     width: 100%;
     min-height: 60px;
     padding: 5px;
@@ -35,6 +36,7 @@ h1{
 }
 
 .tags-input-textarea{
+    opacity: 1;
 	z-index: 1;
 	height: 60px;
 	overflow: hidden;

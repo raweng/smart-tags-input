@@ -36,7 +36,9 @@ var SmartTagsInput = function (obj){
 			var textarea = document.createElement('textarea');
 			textarea.className = "tags-input-textarea tags-input";
 			textarea.value = this.options.value;
+			textarea.autofocus = true;
 			this.textarea = textarea;
+
 
 			var div = document.createElement('div');
 			div.className = "tags-input-div tags-input";
@@ -44,7 +46,9 @@ var SmartTagsInput = function (obj){
 
 			innerWrapper.appendChild(textarea);
 			innerWrapper.appendChild(div);
+			// this.textarea.focus();
 			addListners.call(this);
+
 		}
 	}
 
@@ -64,7 +68,7 @@ var SmartTagsInput = function (obj){
 	var onTextAreaFocus = function(e){
 		this.div.style.opacity = '0';
 		this.textarea.style.opacity = '1';
-		this.textarea.focus();
+		// this.textarea.focus();
 	}
 
 	var onTextAreaBlur = function(e){
