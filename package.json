@@ -1,0 +1,49 @@
+{
+  "name": "smarttagsinput",
+  "version": "1.0.0",
+  "description": "‘Smart Tags Input’ is a JavaScript plugin that allows you to easily turn any text input (entered within double curly braces) into ‘smart tags’. This helps you differentiate normal text from the text that you want to highlight.",
+  "main": "bin/index.js",
+  "author":"Built.io https://www.built.io/",
+  "contributors":[{
+      "name" : "Guruprasanth",
+      "email": "guruprasanth.arunachalam@raweng.com"
+    },
+    {
+      "name" : "Pranjal Patil",
+      "email": "pranjal.patil@raweng.com"
+      }],
+  "scripts": {
+    "start":"gulp serve",
+    "build":"gulp build"
+  },
+  "repository": {
+    "type":"git",
+    "url":"https://github.com/raweng/smart-tags-input"
+  },
+  "bugs":{
+    "url":"https://github.com/raweng/smart-tags-input/issues"
+  },
+  "keywords": [
+    "smarttagsinput",
+    "tags",
+    "tags-input",
+    "tagsinput",
+    "tags input",
+    "built.io"
+    "smart tags",
+    "smart tags input"
+  ],
+  "devDependencies": {
+    "gulp": "~3.8.11",
+    "gulp-uglify": "~1.1.0",
+    "browserify": "~9.0.7",
+    "gulp-zip": "^3.0.2",
+    "gulp-webserver": "~0.9.0",
+    "gulp-load-plugins": "~0.9.0",
+    "vinyl-source-stream": "~1.1.0",
+    "run-sequence": "~1.0.2",
+    "del": "~1.1.1",
+    "gulp-streamify": "~1.0.2"
+  },
+  "license": "MIT"
+}
