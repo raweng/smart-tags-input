@@ -54,7 +54,7 @@ To initialize the plugin you can use init(*options*) function. It accepts an obj
 	 insertValueAt 	| text (*string*) | Sets the text at current cursor position
 	 setValue 	| text (*string*) | Sets the text in the textarea
 
-eg:
+For example:
 ```js
 	tagInputInstance.setValue('this is a text to be set in textarea');
 ```
