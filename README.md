@@ -10,7 +10,7 @@
 
 **Choice of brackets**: We can change the type of bracket by changing the options provided in init(*options*) startLimit and endLimit. 
 ## Motivation
-Our in-house product, Built.io Flow, is an iPaaS platform that integrates various external services. This integration is done by passing data from one activity to another. However, when data of one activity was inserted into the fields of another activity, it was always enclosed within double curly braces. The Built.io Flow team wanted to differentiate this data from normal text by highlighting or tagging the data. After an extensive search on the Web, we found that there are no plugins available that converts data within double curly braces into smart tags. Consequently, we started with creating our own plugin.  
+Our in-house product [Built.io Flow](https://www.built.io/products/flow/overview), is an iPaaS platform that integrates various external services. This integration is done by passing data from one activity to another. However, when data of one activity was inserted into the fields of another activity, it was always enclosed within double curly braces. The Built.io Flow team wanted to differentiate this data from normal text by highlighting or tagging the data. After an extensive search on the Web, we found that there are no plugins available that converts data within double curly braces into smart tags. Consequently, we started with creating our own plugin.  
 
 ## Installation
 
@@ -78,7 +78,7 @@ eg:
 ## License
 
 The MIT License (MIT)
-Copyright (c) 2016 Built.io 
+Copyright (c) 2016 [Built.io](https://www.built.io/) 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
