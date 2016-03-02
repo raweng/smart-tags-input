@@ -1,1 +1,0 @@
-window.SmartTagsInput = require('./index.js')
