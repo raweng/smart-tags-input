@@ -50,6 +50,7 @@ var SmartTagsInput = function (obj){
 			addListners.call(this);
 
 		}
+
 	}
 
 	var optionsMerge = function(options){
@@ -63,6 +64,7 @@ var SmartTagsInput = function (obj){
 		this.textarea.addEventListener('input', this.options.onChange);
 		this.textarea.addEventListener('focus', onTextAreaFocus.bind(this));
 		this.textarea.addEventListener('keydown', onKeyDown.bind(this));
+		this.textarea.addEventListener('keyup', onKeyUp.bind(this));
 	}
 
 	var onTextAreaFocus = function(e){
@@ -111,24 +113,30 @@ var SmartTagsInput = function (obj){
 			}
 
 		}		
-		if (e.keyCode === 13 || e.keyCode === 8 || e.keyCode === 46) {
+		setTimeout( TextareaHeightHandler.bind(this), 0);
+		if ( e.keyCode === 8 || e.keyCode === 46) {
 			this.textarea.style.height = 'auto';
 			this.textarea.style.height = this.textarea.scrollHeight+'px';
 		}
-		TextareaHeightHandler.call(this);
+		
+	}
+
+	var onKeyUp = function(e){
+		// TextareaHeightHandler.call(this);
 	}
 
 	var TextareaHeightHandler = function(){
 		var editableArea = this.textarea;
-		editableArea.style.height = 'auto';
+		// editableArea.style.height = 'auto';
 		var editableAreaHeight = editableArea.scrollHeight,
 			style = window.getComputedStyle(editableArea),
     		top = style.getPropertyValue('padding-top'),
-    		paddingTop = top.substr(0, top.length-2),
+    		paddingTop = Number(top.substr(0, top.length-2)),
     		bottom = style.getPropertyValue('padding-bottom'),
-    		paddingBottom = bottom.substr(0, bottom.length-2);
+    		paddingBottom = Number(bottom.substr(0, bottom.length-2));
 		var finalHeight = editableAreaHeight - paddingTop - paddingBottom;
 		editableArea.style.height = finalHeight+"px";
+		this.innerWrapper.style.height = finalHeight+"px";
 	}
 
 	var validator = function(parsedMatchArray,val,startIndex,endIndex){
