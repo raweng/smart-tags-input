@@ -1,4 +1,4 @@
-#testTagInput{
+#testTagInput .tags-input-wrapper{
 	position: relative;
 	margin: 0 auto;
 	width: 60%;
@@ -14,7 +14,7 @@ h1{
     width: 100%;
     min-height: 60px;
     padding: 5px;
-	border: 2px solid #ccc;
+	border: 1px solid #ccc;
 	border-radius: 2px;
     resize: none;
     position: absolute;
@@ -25,14 +25,15 @@ h1{
     color: #555;
     line-height: 30px;
     white-space: pre-wrap;
-    /*outline: none;*/
     overflow: auto;
+    background: #fff;
 }
 
 .tags-input span{
-	background: #ebebeb;
+	background: #3FAFD0;
+    color: #fff;
     padding: 2px 12px 4px;
-	border-radius: 2px;
+    border-radius: 2px;
 }
 
 .tags-input-textarea{
