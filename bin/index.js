@@ -91,18 +91,18 @@ var SmartTagsInput = function (obj){
 				if(end === start){
 					if(e.keyCode === 8){
 						if(start !==0){
-							output = validator(parsedMatchArray,val,(start-1),(start-1))	
+							output = validator.call(this,parsedMatchArray,val,(start-1),(start-1))	
 						}
 					}else{
 						if(end !== val.length){
-							output = validator(parsedMatchArray,val,(end),(end))	
+							output = validator.call(this,parsedMatchArray,val,(end),(end))	
 						}
 					}
 				}else{
 					if(start < end){
-						output = validator(parsedMatchArray,val,(start),(end-1))
+						output = validator.call(this,parsedMatchArray,val,(start),(end-1))
 					}else{
-						output = validator(parsedMatchArray,val,(end),(start-1))
+						output = validator.call(this,parsedMatchArray,val,(end),(start-1))
 					}
 				}
 
@@ -133,16 +133,26 @@ var SmartTagsInput = function (obj){
 
 	var validator = function(parsedMatchArray,val,startIndex,endIndex){
 		var deleteStart = startIndex,
-			deleteEnd = endIndex +1;
+			deleteEnd = endIndex +1,
+			startRegEx = new RegExp('^'+this.options.startLimit),
+			endRegEx = new RegExp(this.options.endLimit+'$');
 		for (key in parsedMatchArray) {
+
 			var len = parsedMatchArray[key].length;
 			var valIndex = val.indexOf(parsedMatchArray[key]);
-			if( valIndex <= startIndex  && startIndex<= (valIndex + len - 1)){
-				deleteStart = valIndex
-			}
 
-			if(valIndex <= endIndex && endIndex <= (valIndex + len - 1)) {
-				deleteEnd = (valIndex + len);
+			var lenWithoutDelimiter = parsedMatchArray[key].replace(startRegEx, '').replace(endRegEx, '').length;
+			var valIndexWithoutDelimiter = val.indexOf(parsedMatchArray[key].replace(startRegEx, '').replace(endRegEx, ''));
+			
+			if(!(( valIndexWithoutDelimiter <= startIndex  && startIndex<= (valIndexWithoutDelimiter + lenWithoutDelimiter - 1))&&(valIndexWithoutDelimiter <= endIndex && endIndex <= (valIndexWithoutDelimiter + lenWithoutDelimiter - 1)))){
+
+				if( valIndex <= startIndex  && startIndex<= (valIndex + len - 1)){
+					deleteStart = valIndex
+				}
+
+				if(valIndex <= endIndex && endIndex <= (valIndex + len - 1)) {
+					deleteEnd = (valIndex + len);
+				}
 			}
 		}
 
