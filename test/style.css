@@ -1,7 +1,8 @@
-#testTagInput .tags-input-wrapper{
+.tags-input-wrapper{
 	position: relative;
-	margin: 0 auto;
+	margin: 0 auto 10px;
 	width: 60%;
+    box-sizing: content-box;
 }
 h1{
 	text-align: center;
@@ -38,7 +39,10 @@ h1{
 
 .tags-input-textarea{
     opacity: 1;
-	z-index: 1;
-	height: 60px;
-	overflow: hidden;
+    z-index: 1;
+    height: 60px;
+    overflow: hidden;
+}
+.tags-input-div{
+    height: 100%;
 }
