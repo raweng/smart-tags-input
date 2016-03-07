@@ -33,7 +33,7 @@ var SmartTagsInput = function (obj){
 			wrapper.appendChild(innerWrapper);
 			this.innerWrapper = innerWrapper;
 
-			var textarea = document.createElement('textarea');
+			var textarea = document.createElement('input');
 			textarea.className = "tags-input-textarea tags-input";
 			textarea.value = this.options.value;
 			textarea.autofocus = true;
