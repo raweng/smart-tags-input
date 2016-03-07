@@ -46,7 +46,6 @@ var SmartTagsInput = function (obj){
 
 			innerWrapper.appendChild(textarea);
 			innerWrapper.appendChild(div);
-			// this.textarea.focus();
 			addListners.call(this);
 
 		}
@@ -70,7 +69,6 @@ var SmartTagsInput = function (obj){
 	var onTextAreaFocus = function(e){
 		this.div.style.opacity = '0';
 		this.textarea.style.opacity = '1';
-		// this.textarea.focus();
 	}
 
 	var onTextAreaBlur = function(e){
@@ -112,22 +110,17 @@ var SmartTagsInput = function (obj){
 				this.setCursorPosition(output.cursorPosition);
 			}
 
-		}		
-		setTimeout( TextareaHeightHandler.bind(this), 0);
-		if ( e.keyCode === 8 || e.keyCode === 46) {
-			this.textarea.style.height = 'auto';
-			this.textarea.style.height = this.textarea.scrollHeight+'px';
 		}
 		
 	}
 
 	var onKeyUp = function(e){
-		// TextareaHeightHandler.call(this);
+		TextareaHeightHandler.call(this);
 	}
 
 	var TextareaHeightHandler = function(){
 		var editableArea = this.textarea;
-		// editableArea.style.height = 'auto';
+			editableArea.style.height = 'auto';
 		var editableAreaHeight = editableArea.scrollHeight,
 			style = window.getComputedStyle(editableArea),
     		top = style.getPropertyValue('padding-top'),
