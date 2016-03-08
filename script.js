@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function(){
 	var tagInput = new SmartTagsInput("testTagInput");
 	var options = {
-		value:'this is a {{smart tags input}}'
+		value:'This is a {{smart tags}}',
+		isInputTag:false
 	}
 	tagInput.init(options);
 }, false);
