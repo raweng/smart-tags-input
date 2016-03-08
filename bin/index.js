@@ -4,14 +4,18 @@ var SmartTagsInput = function (obj){
 
 	this.innerWrapper = null;
 
-	this.textarea = null;
+	this.inputElem = null;
 
 	this.div = null;
 
 	this.options = {
 		startLimit : '{{',
 		endLimit : '}}',
+		isInputTag :true,
+		inputType : 'text',
 		onChange : function(e){
+		},
+		onFocus : function(e){
 		},
 		value:''
 	};
@@ -33,18 +37,22 @@ var SmartTagsInput = function (obj){
 			wrapper.appendChild(innerWrapper);
 			this.innerWrapper = innerWrapper;
 
-			var textarea = document.createElement('input');
-			textarea.className = "tags-input-textarea tags-input";
-			textarea.value = this.options.value;
-			textarea.autofocus = true;
-			this.textarea = textarea;
+			var inputElem = document.createElement('textarea');
+			if(this.options.isInputTag){
+				inputElem = document.createElement('input');
+				inputElem.type = this.options.inputType;
+			}
+			inputElem.className = "tags-input-textarea tags-input";
+			inputElem.value = this.options.value;
+			inputElem.autofocus = true;
+			this.inputElem = inputElem;
 
 
 			var div = document.createElement('div');
 			div.className = "tags-input-div tags-input";
 			this.div = div;
 
-			innerWrapper.appendChild(textarea);
+			innerWrapper.appendChild(this.inputElem);
 			innerWrapper.appendChild(div);
 			addListners.call(this);
 
@@ -54,21 +62,22 @@ var SmartTagsInput = function (obj){
 
 	var optionsMerge = function(options){
 		for (key in this.options) {
-			this.options[key] = options[key] || this.options[key]
+			this.options[key] = options[key] === false ?false : (options[key]|| this.options[key])
 		}
 	}
 
 	var addListners = function(){
-		this.textarea.addEventListener('blur', onTextAreaBlur.bind(this));
-		this.textarea.addEventListener('input', this.options.onChange);
-		this.textarea.addEventListener('focus', onTextAreaFocus.bind(this));
-		this.textarea.addEventListener('keydown', onKeyDown.bind(this));
-		this.textarea.addEventListener('keyup', onKeyUp.bind(this));
+		this.inputElem.addEventListener('blur', onTextAreaBlur.bind(this));
+		this.inputElem.addEventListener('input', this.options.onChange);
+		this.inputElem.addEventListener('focus', onTextAreaFocus.bind(this));
+		this.inputElem.addEventListener('keydown', onKeyDown.bind(this));
+		this.inputElem.addEventListener('keyup', onKeyUp.bind(this));
 	}
 
 	var onTextAreaFocus = function(e){
 		this.div.style.opacity = '0';
-		this.textarea.style.opacity = '1';
+		this.inputElem.style.opacity = '1';
+		this.options.onFocus(e);
 	}
 
 	var onTextAreaBlur = function(e){
@@ -79,9 +88,9 @@ var SmartTagsInput = function (obj){
 
 	var onKeyDown = function(e){
 		if (e.keyCode === 8 || e.keyCode === 46) {
-			var val = this.textarea.value;
-			var end = this.textarea.selectionEnd;
-			var start = this.textarea.selectionStart;
+			var val = this.inputElem.value;
+			var end = this.inputElem.selectionEnd;
+			var start = this.inputElem.selectionStart;
 
 			var regExp = new RegExp(this.options.startLimit+'(.*?)'+this.options.endLimit,'g')
 			var parsedMatchArray = val.match(regExp);
@@ -106,7 +115,7 @@ var SmartTagsInput = function (obj){
 					}
 				}
 
-				this.textarea.value = output.newValue;
+				this.inputElem.value = output.newValue;
 				this.setCursorPosition(output.cursorPosition);
 			}
 
@@ -119,7 +128,7 @@ var SmartTagsInput = function (obj){
 	}
 
 	var TextareaHeightHandler = function(){
-		var editableArea = this.textarea;
+		var editableArea = this.inputElem;
 			editableArea.style.height = 'auto';
 		var editableAreaHeight = editableArea.scrollHeight,
 			style = window.getComputedStyle(editableArea),
@@ -179,19 +188,19 @@ var SmartTagsInput = function (obj){
 	}
 
 	this.setCursorPosition = function(pos){
-		this.textarea.selectionStart = pos;
-		this.textarea.selectionEnd = pos;
+		this.inputElem.selectionStart = pos;
+		this.inputElem.selectionEnd = pos;
 	}
 
 	this.insertValueAt = function(text){
-		var originalText = this.textarea.value;
-		var end = this.textarea.selectionEnd;
+		var originalText = this.inputElem.value;
+		var end = this.inputElem.selectionEnd;
 		var resultText = originalText.slice(0,end)+ text + originalText.slice(end);
-		this.textarea.value = resultText;
+		this.inputElem.value = resultText;
 	}
 
 	this.setValue = function(text){
-		this.textarea.value = text;
+		this.inputElem.value = text;
 	}
 }
 
