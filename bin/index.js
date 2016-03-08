@@ -42,18 +42,21 @@ var SmartTagsInput = function (obj){
 				inputElem = document.createElement('input');
 				inputElem.type = this.options.inputType;
 			}
-			inputElem.className = "tags-input-textarea tags-input";
+			inputElem.className = "tags-input-textbox tags-input";
 			inputElem.value = this.options.value;
 			inputElem.autofocus = true;
 			this.inputElem = inputElem;
 
-
-			var div = document.createElement('div');
-			div.className = "tags-input-div tags-input";
-			this.div = div;
-
 			innerWrapper.appendChild(this.inputElem);
-			innerWrapper.appendChild(div);
+
+			if (!this.options.isInputTag || (this.options.isInputTag && this.options.inputType === 'text')) {
+				var div = document.createElement('div');
+				div.className = "tags-input-div tags-input";
+				this.div = div;
+				innerWrapper.appendChild(div);
+			}
+
+			TextareaHeightHandler.call(this);
 			addListners.call(this);
 
 		}
@@ -75,15 +78,19 @@ var SmartTagsInput = function (obj){
 	}
 
 	var onTextAreaFocus = function(e){
-		this.div.style.opacity = '0';
-		this.inputElem.style.opacity = '1';
+		if(this.div){			
+			this.div.style.opacity = '0';
+			this.inputElem.style.opacity = '1';
+		}
 		this.options.onFocus(e);
 	}
 
 	var onTextAreaBlur = function(e){
-		parse.call(this,e.currentTarget.value);
-		e.currentTarget.style.opacity = '0';
-		this.div.style.opacity = '1';
+		if(this.div){			
+			parse.call(this,e.currentTarget.value);
+			e.currentTarget.style.opacity = '0';
+			this.div.style.opacity = '1';
+		}
 	}
 
 	var onKeyDown = function(e){
