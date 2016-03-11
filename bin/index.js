@@ -151,16 +151,19 @@ var SmartTagsInput = function (obj){
 	var validator = function(parsedMatchArray,val,startIndex,endIndex){
 		var deleteStart = startIndex,
 			deleteEnd = endIndex +1,
+			pos = 0,
 			startRegEx = new RegExp('^'+this.options.startLimit),
 			endRegEx = new RegExp(this.options.endLimit+'$');
 		for (key in parsedMatchArray) {
 
 			var len = parsedMatchArray[key].length;
-			var valIndex = val.indexOf(parsedMatchArray[key]);
-
-			var lenWithoutDelimiter = parsedMatchArray[key].replace(startRegEx, '').replace(endRegEx, '').length;
-			var valIndexWithoutDelimiter = val.indexOf(parsedMatchArray[key].replace(startRegEx, '').replace(endRegEx, ''));
+			var valIndex = val.indexOf(parsedMatchArray[key],pos);
 			
+			var lenWithoutDelimiter = parsedMatchArray[key].replace(startRegEx, '').replace(endRegEx, '').length;
+			var valIndexWithoutDelimiter = val.indexOf(parsedMatchArray[key].replace(startRegEx, '').replace(endRegEx, ''),pos);
+			
+			pos = valIndex + len;
+
 			if(!(( valIndexWithoutDelimiter <= startIndex  && startIndex<= (valIndexWithoutDelimiter + lenWithoutDelimiter - 1))&&(valIndexWithoutDelimiter <= endIndex && endIndex <= (valIndexWithoutDelimiter + lenWithoutDelimiter - 1)))){
 
 				if( valIndex <= startIndex  && startIndex<= (valIndex + len - 1)){
@@ -194,6 +197,16 @@ var SmartTagsInput = function (obj){
 		this.div.innerHTML = val;
 	}
 
+	var trigger = function(element,event){
+		if ("createEvent" in document) {
+		    var evt = document.createEvent("HTMLEvents");
+		    evt.initEvent(event, false, true);
+		    element.dispatchEvent(evt);
+		}
+		else
+		    element.fireEvent(event);
+	}
+
 	this.setCursorPosition = function(pos){
 		this.inputElem.selectionStart = pos;
 		this.inputElem.selectionEnd = pos;
@@ -204,10 +217,18 @@ var SmartTagsInput = function (obj){
 		var end = this.inputElem.selectionEnd;
 		var resultText = originalText.slice(0,end)+ text + originalText.slice(end);
 		this.inputElem.value = resultText;
+		if(this.div){
+			parse.call(this,resultText);
+		}
+		trigger(this.inputElem,'input');
 	}
 
 	this.setValue = function(text){
 		this.inputElem.value = text;
+		if(this.div){
+			parse.call(this,text);
+		}
+		trigger(this.inputElem,'input');
 	}
 }
 
