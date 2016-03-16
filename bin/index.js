@@ -41,6 +41,8 @@ var SmartTagsInput = function (obj){
 			if(this.options.isInputTag){
 				inputElem = document.createElement('input');
 				inputElem.type = this.options.inputType;
+			}else{
+				innerWrapper.className = "tags-input-wrapper tags-textarea-wrapper";
 			}
 			inputElem.className = "tags-input-textbox tags-input";
 			inputElem.value = this.options.value;
@@ -124,6 +126,7 @@ var SmartTagsInput = function (obj){
 
 				this.inputElem.value = output.newValue;
 				this.setCursorPosition(output.cursorPosition);
+				trigger(this.inputElem,'input');
 			}
 
 		}

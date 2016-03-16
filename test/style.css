@@ -3,6 +3,10 @@
 	margin: 0 auto 10px;
 	width: 60%;
     box-sizing: content-box;
+    min-height: 30px;
+}
+.tags-input-wrapper.tags-textarea-wrapper{
+    min-height: 60px;
 }
 .smart-tags-title{
 	text-align: center;
