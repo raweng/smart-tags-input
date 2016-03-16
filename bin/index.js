@@ -231,7 +231,6 @@ var SmartTagsInput = function (obj){
 		if(this.div){
 			parse.call(this,text);
 		}
-		trigger(this.inputElem,'input');
 	}
 }
 
