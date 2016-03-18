@@ -231,6 +231,7 @@ var SmartTagsInput = function (obj){
 		if(this.div){
 			parse.call(this,text);
 		}
+		TextareaHeightHandler.call(this);
 	}
 }
 
