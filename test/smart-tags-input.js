@@ -48,8 +48,9 @@ var SmartTagsInput = function (obj){
 				innerWrapper.className = "tags-input-wrapper tags-textarea-wrapper";
 			}
 			inputElem.className = "tags-input-textbox tags-input";
+			inputElem.style.opacity = 0;
 			inputElem.value = this.options.value;
-			inputElem.autofocus = true;
+			// inputElem.autofocus = true;
 			this.inputElem = inputElem;
 
 			innerWrapper.appendChild(this.inputElem);
@@ -57,8 +58,10 @@ var SmartTagsInput = function (obj){
 			if (!this.options.isInputTag || (this.options.isInputTag && this.options.inputType === 'text')) {
 				var div = document.createElement('div');
 				div.className = "tags-input-div tags-input";
+				div.style.opacity = 1;
 				this.div = div;
 				innerWrapper.appendChild(div);
+				parse.call(this,this.options.value);
 			}
 
 			TextareaHeightHandler.call(this);
